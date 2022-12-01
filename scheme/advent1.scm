@@ -20,16 +20,17 @@
                     (cons (+ (car rest) (car acc)) (cdr acc))
                     (cdr rest))))))
 
-(define nums
+(->> INPUT
     (map
         (lambda (a)
             (if (equal? "" a)
                 -1
-                (string->number a)))
-        INPUT))
+                (string->number a))))
+    group-calories
+    ((cut sort <> >))
+    ((lambda (grouped)
+        (println "Answer 1: " (car grouped))
+        (println "Answer 2: " (+ (car grouped) (cadr grouped) (caddr grouped))))))
 
-(define grouped (group-calories nums))
 
-(println "Answer 1: " (car (sort grouped >)))
 
-(println "Answer 2: " (let ((sorted (sort grouped >))) (+ (car sorted) (cadr sorted) (caddr sorted))))
